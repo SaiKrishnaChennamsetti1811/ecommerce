@@ -1,0 +1,63 @@
+insert into emp225(ename,dname,phno,hiredate,designation)
+values
+	('krishna','dev','123456789','2024-01-22','ASE'),
+	('raju','dev','1234567890','2021-02-25','ASE'),
+	('nithin','dev','1234567899','2024-01-19','ASE');
+	
+select * from emp225;
+
+create or replace function getAllEmp()
+Returns table(
+		empid int,
+		ename varchar(50),
+		dname varchar(50),
+		phno varchar(20),
+		hiredate Date,
+		designation varchar(50)
+	)as
+	$$
+	begin
+		return query select * from emp225;
+	end;
+	$$
+	language plpgsql;
+	
+	
+create or replace function getFirstEmp()
+Returns table(
+		empid int,
+		ename varchar(50),
+		dname varchar(50),
+		phno varchar(20),
+		hiredate Date,
+		designation varchar(50)
+	)as
+	$$
+	begin
+		return query select * from emp225 limit 1;
+	end;
+	$$
+	language plpgsql;
+	
+	
+	
+	
+create or replace function getLastEmp()
+Returns table(
+		empid int,
+		ename varchar(50),
+		dname varchar(50),
+		phno varchar(20),
+		hiredate Date,
+		designation varchar(50)
+	)as
+	$$
+	begin
+		return query select * from emp225 order by empid desc limit 1;
+	end;
+	$$
+	language plpgsql;
+	
+	
+select current_setting('max_connections');
+
